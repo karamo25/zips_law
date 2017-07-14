@@ -1,0 +1,38 @@
+import string
+
+def process_file(filename):
+  hist = {}
+  fp = open(filename)
+  for line in fp:
+    process_line(line, hist)
+  
+  return hist
+  
+def process_line(line, hist):
+  line = line.replace('-', ' ')
+    
+  line.split()
+  for word in line:
+    word = word.strip(string.punctuation + string.whitespace)
+    word = word.lower()
+    
+    hist[word] = hist.get(word, 0) + 1
+    
+  return hist
+  
+def most_common(hist, limit=10):
+  d = []
+  
+  for key,var in hist.items():
+    d.append((var, key))
+    
+  d.sort(reverse=True)
+  return d
+  
+if _name_ =='_main_':
+  filename = 'words.txt'
+  hist = process_filename(filename)
+  print 'The most common words are: \n'
+  most_common(hist)
+  
+  
